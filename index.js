@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { colorChecker, errorHandler } from './middleware/todoColorChecker.js';
 import todosRouter from './routes/todos.routes.js';
-// import { middleware } from 'yargs';
 
 const { json } = bodyParser;
 
