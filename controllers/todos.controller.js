@@ -1,10 +1,11 @@
-import todosCoordinator from '../coordinators/todos.coordinator.js';
+// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
+import TodosCoordinator from '../coordinators/todos.coordinator.js';
 
-export const gettodos = async (req, res, next) => {
+export const getTodos = async (req, res, next) => {
   console.log('Controller : getTodos()');
 
   try {
-    const result = await todosCoordinator.gettodos(req.body);
+    const result = await TodosCoordinator.getTodos(req.body);
     res.status(200).json(result);
     console.log(result);
   } catch (ex) {
@@ -12,11 +13,11 @@ export const gettodos = async (req, res, next) => {
   }
 };
 
-export const createtodo = async (req, res, next) => {
+export const createTodo = async (req, res, next) => {
   console.log('Controller : createTodo()');
 
   try {
-    const result = await todosCoordinator.createtodo(req.body);
+    const result = await TodosCoordinator.createTodo(req.body);
     res.status(201).json(result);
     console.log(result);
   } catch (ex) {
@@ -24,11 +25,11 @@ export const createtodo = async (req, res, next) => {
   }
 };
 
-export const gettodo = async (req, res, next) => {
+export const getTodo = async (req, res, next) => {
   console.log(`Controller : getTodo(${req.params.id})`);
 
   try {
-    const result = await todosCoordinator.gettodo(req.params.id);
+    const result = await TodosCoordinator.getTodo(req.params.id);
     if (result) {
       res.status(200).json(result);
       console.log(result);
@@ -40,11 +41,11 @@ export const gettodo = async (req, res, next) => {
   }
 };
 
-export const deletetodo = async (req, res, next) => {
+export const deleteTodo = async (req, res, next) => {
   console.log(`Controller : deleteTodo(${req.params.id})`);
 
   try {
-    const result = await todosCoordinator.deletetodo(req.params.id, req.body);
+    const result = await TodosCoordinator.deleteTodo(req.params.id, req.body);
 
     if (result) {
       res.status(200).json(result);
@@ -58,11 +59,11 @@ export const deletetodo = async (req, res, next) => {
   }
 };
 
-export const replacetodo = async (req, res, next) => {
+export const replaceTodo = async (req, res, next) => {
   console.log(`Controller : replaceTodo(${req.params.id})`);
 
   try {
-    const result = await todosCoordinator.replacetodo(req.params.id, req.body);
+    const result = await TodosCoordinator.replaceTodo(req.params.id, req.body);
 
     if (result) {
       res.status(201).json(result);
@@ -75,11 +76,11 @@ export const replacetodo = async (req, res, next) => {
   }
 };
 
-export const updatetodo = async (req, res, next) => {
+export const updateTodo = async (req, res, next) => {
   console.log(`Controller : updateTodo(${req.params.id})`);
 
   try {
-    const result = await todosCoordinator.updatetodo(req.params.id, req.body);
+    const result = await TodosCoordinator.updateTodo(req.params.id, req.body);
 
     if (result) {
       res.status(201).json(result);

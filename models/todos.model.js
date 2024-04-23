@@ -2,113 +2,68 @@
 /* eslint-disable import/first */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-let todos = [
-  {
-    id: '1',
-    name: 'Chores',
-    color: 'Green',
-  },
-  {
-    id: '2',
-    name: 'Walk the dog',
-    color: 'Blue',
-  },
-  {
-    id: '3',
-    name: 'Lab Homework',
-    color: 'Red',
-  },
-];
+import { db } from '../lib/database.js';
+import Constants from '../lib/constants.js';
 
-export default class todosModel {
-  static gettodos = async () => {
-    console.log('\t\t Model : gettodos()');
-    return todos;
+export default class TodosModel {
+  static getTodos = async () => {
+    console.log('\t\t Model : getTodos()');
+
+    return db.dbTodos().find(
+      {},
+      { projection: Constants.DEFAULT_PROJECTION },
+    ).toArray();
   };
 
-  static createtodo = async (newtodo) => {
-    console.log('\t\t Model : createtodo()');
-    newtodo.hexColor = todosModel.todoColorHex(newtodo.color);
-    todos.push(newtodo);
-    return newtodo;
+  static createTodo = async (newTodo) => {
+    console.log('\t\t Model : createTodo()');
+    await db.dbTodos().insertOne(newTodo);
+
+    const returnTodo = { ...newTodo };
+    // eslint-disable-next-line no-underscore-dangle
+    delete returnTodo._id;
+    return returnTodo;
   };
 
-  static todoColorHex = (color) => {
-    const mapping = {
-      red: '#ff0000',
-      green: '#00ff00',
-      blue: '#0000ff',
-    };
-
-    return mapping[color.toLowerCase()] || '';
+  static getTodo = (id) => {
+    console.log('\t\t Model : getTodo()');
+    return db.dbTodos().findOne({ id }, { projection: Constants.DEFAULT_PROJECTION });
   };
 
-  static gettodo = (id) => {
-    console.log('\t\t Model : gettodo()');
-    const todo = todos.find((w) => (w.id === id));
-    return todo;
+  static deleteTodo = (id) => {
+    console.log('\t\t Model : deleteTodo()');
+    return db.dbTodos().deleteOne({ id });
   };
 
-  static deletetodo = (id) => {
-    console.log('\t\t Model : deletetodo()');
+  static replaceTodo = async (id, Todo) => {
+    const result = await db.dbTodos().replaceOne({ id }, Todo);
 
-    const todoCountBeforeDelete = todos.length;
-    todos = todos.filter((w) => (w.id !== id));
-
-    if (todoCountBeforeDelete === todos.length) {
-      return false;
-    }
-
-    return true;
-  };
-
-  static replacetodo = async (id, newTodo) => {
-    const todoIndex = todos.findIndex((todo) => todo.id === id);
-
-    if (todoIndex > -1) {
-      // Calculate hexColor if the color is changed
-      if (newTodo.color && newTodo.color !== todos[todoIndex].color) {
-        newTodo.hexColor = todosModel.todoColorHex(newTodo.color);
-      } else {
-        newTodo.hexColor = todos[todoIndex].hexColor; // Preserve the existing hexColor
-      }
-
-      // Replace todo at todoIndex with the newTodo
-      todos = [
-        ...todos.slice(0, todoIndex),
-        newTodo,
-        ...todos.slice(todoIndex + 1),
-      ];
-
-      return newTodo;
+    if (result.matchedCount === 1) {
+      return Todo;
     }
 
     return false;
   };
 
-  static updatetodo = async (id, updatedTodo) => {
-    const todoIndex = todos.findIndex((w) => w.id === id);
+  static updateTodo = async (id, Todo) => {
+    const update = {
+      $set: {},
+    };
 
-    if (todoIndex > -1) {
-      const todo = todos[todoIndex];
-      const updatedProperties = Object.keys(updatedTodo);
-
-      if (updatedProperties.includes('color')) {
-        // Update the hexColor if the color is changed
-        updatedTodo.hexColor = todosModel.todoColorHex(updatedTodo.color);
-      } else {
-        // Preserve the existing hexColor
-        updatedTodo.hexColor = todo.hexColor;
+    Object.keys(Todo).forEach((key) => {
+      if (key === 'id') {
+        return;
       }
 
-      updatedProperties.forEach((key) => {
-        // Exclude id from being updated
-        if (key !== 'id') {
-          todo[key] = updatedTodo[key];
-        }
-      });
+      update.$set[key] = Todo[key];
+    });
 
-      return todo;
+    const result = await db.dbTodos().findOneAndUpdate({ id }, update, { returnDocument: 'after' });
+
+    if (result) {
+      // eslint-disable-next-line no-underscore-dangle
+      delete result._id;
+      return result;
     }
 
     return false;
