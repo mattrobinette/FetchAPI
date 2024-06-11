@@ -1,9 +1,9 @@
 import config from 'config';
 import express from 'express';
 import bodyParser from 'body-parser';
-import colorCheckerMiddleware from './middleware/todoColorChecker.js';
+import validationMiddleware from './middleware/validationChecker.js';
 import errorMiddleware from './middleware/errorHandler.js';
-import todosRouter from './routes/todos.routes.js';
+import dogsRouter from './routes/dogs.routes.js';
 import { db } from './lib/database.js';
 
 const { json } = bodyParser;
@@ -12,11 +12,13 @@ const app = express();
 const port = 3000;
 app.use(json());
 
-app.post('/api/v1/todos', colorCheckerMiddleware());
-app.patch('/api/v1/todos/:id', colorCheckerMiddleware());
-app.put('/api/v1/todos/:id', colorCheckerMiddleware());
+app.use(express.static('static'));
 
-app.use('/api/v1/todos', todosRouter);
+app.post('/api/v1/dogs', validationMiddleware());
+app.patch('/api/v1/dogs/:id', validationMiddleware());
+app.put('/api/v1/dogs/:id', validationMiddleware());
+
+app.use('/api/v1/dogs', dogsRouter);
 
 // Always place error middleware last
 app.use(errorMiddleware());

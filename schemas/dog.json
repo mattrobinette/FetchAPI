@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://myapplication/dog.json",
+  "title": "dog",
+  "description": "A dog",
+  "type": "object",
+  "required": ["name", "age", "breed", "weight", "location"],
+  "properties": {
+    "id": {
+      "description": "The unique id for this dog in UUID format",
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "description": "The name of this dog",
+      "type": "string",
+      "minLength": 3
+    },
+    "color": {
+      "description": "The color of this dog",
+      "type": "string",
+      "enum": ["black", "white", "brown", "brindle"]
+    },
+    "weight": {
+      "description": "The weight of this dog",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 150
+    },
+    "tags": {
+      "description": "Tags for this dog for searching and categorization",
+      "type": "array"
+    },
+    "tracking": {
+      "type": "object",
+      "properties": {
+        "lastUpdated": {
+          "description": "The date this dog was last updated",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedBy": {
+          "description": "The userID that last updated this dog",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

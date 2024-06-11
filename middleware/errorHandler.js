@@ -15,7 +15,7 @@ const middleware = () => (err, req, res, next) => {
 
   // Correct HTTP status
 
-  // TODO: Send response to client.
+  // dog: Send response to client.
   res.status(responseCode).json({
     error,
   });
