@@ -1,2 +1,2 @@
-# arca-20240323
-Class project repo
+# FetchAPI
+ArCa class project repo 2024
