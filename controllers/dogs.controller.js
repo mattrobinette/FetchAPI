@@ -18,7 +18,7 @@ export const createDog = async (req, res, next) => {
   console.log('Controller : createDog()');
 
   try {
-    const result = await dogsCoordinator.createdog(req.body);
+    const result = await dogsCoordinator.createDog(req.body);
     res.status(201).json(result);
     console.log(result);
   } catch (ex) {
@@ -26,7 +26,7 @@ export const createDog = async (req, res, next) => {
   }
 };
 
-export const getdog = async (req, res, next) => {
+export const getDog = async (req, res, next) => {
   console.log(`Controller : getDog(${req.params.id})`);
 
   try {
