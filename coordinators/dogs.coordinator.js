@@ -13,17 +13,17 @@ addFormats(ajv);
 const validate = ajv.compile(dogSchema);
 
 export default class dogsCoordinator {
-  static getdogs = () => {
-    console.log('\t Coordinator : getdogs()');
+  static getDogs = () => {
+    console.log('\t Coordinator : getDogs()');
 
-    return dogsModel.getdogs();
+    return dogsModel.getDogs();
   };
 
-  static createdog = (newdog) => {
-    console.log('\t Coordinator : createdog()');
+  static createDog = (newDog) => {
+    console.log('\t Coordinator : createDog()');
 
     const dog = {
-      ...newdog,
+      ...newDog,
       id: uuid(),
     };
 
@@ -32,36 +32,36 @@ export default class dogsCoordinator {
       throw validate.errors
     };
 
-    return dogsModel.createdog(dog);
+    return dogsModel.createDog(dog);
   };
 
-  static getdog = (id) => {
-    console.log('\t Coordinator : getdog()');
-    return dogsModel.getdog(id);
+  static getDog = (id) => {
+    console.log('\t Coordinator : getDog()');
+    return dogsModel.getDog(id);
   };
 
-  static deletedog = (id) => {
-    console.log('\t Coordinator : deletedog()');
-    return dogsModel.deletedog(id);
+  static deleteDog = (id) => {
+    console.log('\t Coordinator : deleteDog()');
+    return dogsModel.deleteDog(id);
   };
 
-  static replacedog = (id, dog) => {
-    const replacedog = {
+  static replaceDog = (id, dog) => {
+    const replaceDog = {
       ...dog,
       id,
     };
 
-    return dogsModel.replacedog(id, replacedog);
+    return dogsModel.replaceDog(id, replaceDog);
   };
 
-  static updatedog = (id, dog) => {
-    console.log('\t Coordinator : updatedog()');
+  static updateDog = (id, dog) => {
+    console.log('\t Coordinator : updateDog()');
 
     const valid = validate(dog);
     if (!valid) {
       throw validate.errors
     };
     
-    return dogsModel.updatedog(id, dog);
+    return dogsModel.updateDog(id, dog);
   };
 }

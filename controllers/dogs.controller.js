@@ -2,11 +2,11 @@
 
 import dogsCoordinator from '../coordinators/dogs.coordinator.js';
 
-export const getdogs = async (req, res, next) => {
-  console.log('Controller : getdogs()');
+export const getDogs = async (req, res, next) => {
+  console.log('Controller : getDogs()');
 
   try {
-    const result = await dogsCoordinator.getdogs(req.body);
+    const result = await dogsCoordinator.getDogs(req.body);
     res.status(200).json(result);
     console.log(result);
   } catch (ex) {
@@ -14,8 +14,8 @@ export const getdogs = async (req, res, next) => {
   }
 };
 
-export const createdog = async (req, res, next) => {
-  console.log('Controller : createdog()');
+export const createDog = async (req, res, next) => {
+  console.log('Controller : createDog()');
 
   try {
     const result = await dogsCoordinator.createdog(req.body);
@@ -27,10 +27,10 @@ export const createdog = async (req, res, next) => {
 };
 
 export const getdog = async (req, res, next) => {
-  console.log(`Controller : getdog(${req.params.id})`);
+  console.log(`Controller : getDog(${req.params.id})`);
 
   try {
-    const result = await dogsCoordinator.getdog(req.params.id);
+    const result = await dogsCoordinator.getDog(req.params.id);
     if (result) {
       res.status(200).json(result);
       console.log(result);
@@ -42,11 +42,11 @@ export const getdog = async (req, res, next) => {
   }
 };
 
-export const deletedog = async (req, res, next) => {
-  console.log(`Controller : deletedog(${req.params.id})`);
+export const deleteDog = async (req, res, next) => {
+  console.log(`Controller : deleteDog(${req.params.id})`);
 
   try {
-    const result = await dogsCoordinator.deletedog(req.params.id, req.body);
+    const result = await dogsCoordinator.deleteDog(req.params.id, req.body);
 
     if (result) {
       res.status(200).json(result);
@@ -60,11 +60,11 @@ export const deletedog = async (req, res, next) => {
   }
 };
 
-export const replacedog = async (req, res, next) => {
-  console.log(`Controller : replacedog(${req.params.id})`);
+export const replaceDog = async (req, res, next) => {
+  console.log(`Controller : replaceDog(${req.params.id})`);
 
   try {
-    const result = await dogsCoordinator.replacedog(req.params.id, req.body);
+    const result = await dogsCoordinator.replaceDog(req.params.id, req.body);
 
     if (result) {
       res.status(201).json(result);
@@ -77,11 +77,11 @@ export const replacedog = async (req, res, next) => {
   }
 };
 
-export const updatedog = async (req, res, next) => {
-  console.log(`Controller : updatedog(${req.params.id})`);
+export const updateDog = async (req, res, next) => {
+  console.log(`Controller : updateDog(${req.params.id})`);
 
   try {
-    const result = await dogsCoordinator.updatedog(req.params.id, req.body);
+    const result = await dogsCoordinator.updateDog(req.params.id, req.body);
 
     if (result) {
       res.status(201).json(result);
@@ -104,7 +104,7 @@ export const uploadImage = async (req, res, next) => {
   res.sendStatus(200);
 
   try {
-    const result = null;//await dogsCoordinator.updatedog(req.params.id, req.body);
+    const result = null;//await dogsCoordinator.updateDog(req.params.id, req.body);
 
     if (result) {
       res.status(200).json(result);
