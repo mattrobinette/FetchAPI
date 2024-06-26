@@ -51,6 +51,11 @@ export default class dogsCoordinator {
       id,
     };
 
+    const valid = validate(dog);
+    if (!valid) {
+      throw validate.errors
+    };
+    
     return dogsModel.replaceDog(id, replaceDog);
   };
 

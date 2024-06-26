@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import multer from 'multer';
+// import multer from 'multer';
 import express from 'express';
 import {
   getDogs,
@@ -30,14 +30,14 @@ dogsRouter.delete('/:id', deleteDog);
 // PATCH /api/v1/dogs/<id>
 dogsRouter.patch('/:id', updateDog);
 
-const uploader = multer({
-  dest: './static/dogs/image-uploads/',
-  limits: {
-    fileSize: 5_000_000, // 5MB
-  },
-});
+// const uploader = multer({
+//   dest: './static/dogs/image-uploads/',
+//   limits: {
+//     fileSize: 5_000_000, // 5MB
+//   },
+// });
 
 // POST /api/v1/dogs/<id>/images
-widgetsRouter.post('/:is/images', uploader.single('dogImage'), uploadImage);
+// dogsRouter.post('/:is/images', uploader.single('dogImage'), uploadImage);
 
 export default dogsRouter;

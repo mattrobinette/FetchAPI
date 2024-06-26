@@ -1,7 +1,7 @@
 const middleware = () => (req, res, next) => {
-  if (req.body?.color?.toLowerCase() === 'orange') {
+  if (req.body?.name?.age?.breed?.location?.() === null) {
     res.status(400).json({
-      error: 'We do not allow orange',
+      error: 'Required fields must be filled out',
     });
 
     return;

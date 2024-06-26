@@ -4,7 +4,7 @@
   "title": "dog",
   "description": "A dog",
   "type": "object",
-  "required": ["name", "age", "breed", "weight", "location"],
+  "required": ["name", "age", "breed", "location"],
   "properties": {
     "id": {
       "description": "The unique id for this dog in UUID format",
@@ -16,16 +16,13 @@
       "type": "string",
       "minLength": 3
     },
-    "color": {
+    "breed": {
       "description": "The color of this dog",
-      "type": "string",
-      "enum": ["black", "white", "brown", "brindle"]
+      "type": "string"
     },
-    "weight": {
-      "description": "The weight of this dog",
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 150
+    "location": {
+      "description": "The location of this dog",
+      "type": "string"
     },
     "tags": {
       "description": "Tags for this dog for searching and categorization",

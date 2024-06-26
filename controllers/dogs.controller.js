@@ -1,5 +1,4 @@
 // eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
-
 import dogsCoordinator from '../coordinators/dogs.coordinator.js';
 
 export const getDogs = async (req, res, next) => {
@@ -49,11 +48,11 @@ export const deleteDog = async (req, res, next) => {
     const result = await dogsCoordinator.deleteDog(req.params.id, req.body);
 
     if (result) {
-      res.status(200).json(result);
-      console.log('dog successfully deleted!');
+      res.status(204).json(result);
+      // console.log('dog successfully deleted!');
     } else {
-      res.status(404).json();
-      console.log('dog not found. :(');
+      res.status(204).json();
+      // console.log('dog not found. :(');
     }
   } catch (ex) {
     next(ex);
@@ -95,7 +94,7 @@ export const updateDog = async (req, res, next) => {
 };
 
 export const uploadImage = async (req, res, next) => {
-  console.log('Controller : uploadImage(${req.params.id})');
+  // console.log('Controller : uploadImage(${req.params.id})');
 
   if (req.file) {
     console.log('Looks like we got a file');
@@ -104,7 +103,7 @@ export const uploadImage = async (req, res, next) => {
   res.sendStatus(200);
 
   try {
-    const result = null;//await dogsCoordinator.updateDog(req.params.id, req.body);
+    const result = null;// await dogsCoordinator.updateDog(req.params.id, req.body);
 
     if (result) {
       res.status(200).json(result);
