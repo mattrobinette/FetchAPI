@@ -4,7 +4,7 @@
   "title": "dog",
   "description": "A dog",
   "type": "object",
-  "required": ["name", "age", "breed", "location"],
+  "required": ["name", "age", "breed", "weight", "location"],
   "properties": {
     "id": {
       "description": "The unique id for this dog in UUID format",
@@ -17,12 +17,80 @@
       "minLength": 3
     },
     "breed": {
+      "description": "The breed of this dog",
+      "type": "string",
+      "minLength": 3
+    },
+    "age": {
+      "description": "The age of the dog",
+      "type": "integer"
+    },
+    "gender": {
+      "description": "The gender of this dog",
+      "type": "string",
+      "enum": ["Male", "Female"]
+    },
+    "size": {
+      "description": "The size of this dog",
+      "type": "string",
+      "enum": ["Small", "Medium", "Large"]
+    },
+    "weight": {
+      "description": "The weight of this dog",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 150
+    },
+    "color": {
       "description": "The color of this dog",
+      "type": "string",
+      "enum": ["Black", "Blue", "Brown", "Cream", "Golden", "Grey", "Red", "White"]
+    },
+    "vaccinated": {
+      "description": "If the dog is up-to-date on vaccinations",
+      "type": "boolean"
+    },
+    "spayedNeutered": {
+      "description": "If the dog is spayed or neutered",
+      "type": "boolean"
+    },
+    "healthIssues": {
+      "description": "Any known health issues or special needs",
       "type": "string"
     },
+    "temperament": {
+      "description": "The temperament of this dog",
+      "type": "string",
+      "minLength": 3
+    },
+    "training": {
+      "description": "Any training the dog has received",
+      "type": "string",
+      "minLength": 3
+    },
+    "adoptionFee": {
+      "description": "The price of adoption for this dog",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 150
+    },
     "location": {
-      "description": "The location of this dog",
-      "type": "string"
+      "description": "The current location of the dog",
+      "type": "string",
+      "minLength": 3
+    },
+    "availabilityDate": {
+      "description": "When the dog will be available for adoption",
+      "type": "string",
+      "format": "date"
+    },
+    "photos": {
+      "description": "Photos of this dog",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "nullable": true
     },
     "tags": {
       "description": "Tags for this dog for searching and categorization",

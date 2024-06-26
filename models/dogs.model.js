@@ -1,13 +1,13 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable import/first */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import { db } from '../lib/database.js';
 import Constants from '../lib/constants.js';
+import logger from '../lib/logger.js';
 
-export default class dogsModel {
+export default class DogsModel {
   static getDogs = async () => {
-    console.log('\t\t Model : getDogs()');
+    logger.debug('getDogs', {
+      location: 'model',
+      function: 'getDogs',
+    });
 
     return db.dbDogs().find(
       {},
@@ -16,7 +16,11 @@ export default class dogsModel {
   };
 
   static createDog = async (newDog) => {
-    console.log('\t\t Model : createDog()');
+    logger.debug({
+      location: 'model',
+      function: 'createDog',
+    });
+
     await db.dbDogs().insertOne(newDog);
 
     const returnDog = { ...newDog };
@@ -26,16 +30,30 @@ export default class dogsModel {
   };
 
   static getDog = (id) => {
-    console.log('\t\t Model : getDog()');
+    logger.debug({
+      location: 'model',
+      function: 'getDog',
+      id,
+    });
     return db.dbDogs().findOne({ id }, { projection: Constants.DEFAULT_PROJECTION });
   };
 
   static deleteDog = (id) => {
-    console.log('\t\t Model : deleteDog()');
+    logger.debug({
+      location: 'model',
+      function: 'deleteDog',
+      id,
+    });
     return db.dbDogs().deleteOne({ id });
   };
 
   static replaceDog = async (id, dog) => {
+    logger.debug({
+      location: 'model',
+      function: 'replaceDog',
+      id,
+    });
+
     const result = await db.dbDogs().replaceOne({ id }, dog);
 
     if (result.matchedCount === 1) {
@@ -46,6 +64,12 @@ export default class dogsModel {
   };
 
   static updateDog = async (id, dog) => {
+    logger.debug({
+      location: 'model',
+      function: 'updateDog',
+      id,
+    });
+
     const update = {
       $set: {},
     };
@@ -67,5 +91,21 @@ export default class dogsModel {
     }
 
     return false;
+  };
+
+  static addImageToDog = async (id, imagePath) => {
+    logger.debug({
+      location: 'model',
+      function: 'addImageToWidget',
+      id,
+      imagePath,
+    });
+    const update = {
+      $push: {
+        photos: imagePath,
+      },
+    };
+
+    return db.dbDogs().updateOne({ id }, update);
   };
 }
