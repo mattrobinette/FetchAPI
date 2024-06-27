@@ -4,7 +4,7 @@
   "title": "dog",
   "description": "A dog",
   "type": "object",
-  "required": ["name", "age", "breed", "weight", "location"],
+  "required": ["name", "age", "breed", "gender", "weight", "location"],
   "properties": {
     "id": {
       "description": "The unique id for this dog in UUID format",
